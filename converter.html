@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Converter</title>
+    <style>
+        body {
+            margin: 0;
+
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+            height: 100vh;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("bg.jpg");
+            color: aliceblue;
+        }
+
+        .box {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+
+            width: 25vw;
+            height: 60vh;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+        }
+
+        .box>div {
+            display: flex;
+            align-items: center;
+        }
+
+        .box>div>input {
+            height: 5vh;
+            width: 16vw;
+            color: aliceblue;
+            font-size: 1.6rem;
+            background: transparent;
+            font-weight: bolder;
+            border-right: 0;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+        }
+
+        span {
+            background-color: rgb(4, 107, 132);
+            color: whitesmoke;
+            font-size: 2rem;
+            padding: 2%;
+            width: 2vw;
+            margin: 0 1%;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            max-height: 6vh;
+
+        }
+
+        button {
+            background-color: rgb(4, 107, 132);
+            color: aliceblue;
+            padding: 3%;
+            font-size: 2rem;
+            width: 18vw;
+            border: 0;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+            cursor: pointer;
+
+        }
+
+        button:hover {
+            background-color: rgb(1, 88, 110);
+            ;
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: bolder;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Temperature Converter</h1>
+        <div class="box">
+            <div>
+                <input type="number" id="celcius">
+                <span>°C</span>
+            </div>
+            <div>
+                <input type="number" id="fehr">
+                <span>°F</span>
+            </div>
+            <div>
+                <input type="number" id="kelvin">
+                <span>&nbsp;K</span>
+            </div>
+            <div>
+                <button id="btn">Clear</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        let c = document.querySelector("#celcius")
+        let f = document.querySelector("#fehr")
+        let k = document.querySelector("#kelvin")
+        let btn = document.querySelector("#btn")
+        function round(value) {
+            let result = Math.round(value * 100) / 100;
+            return result;
+        }
+        c.addEventListener('input', function () {
+            let cTemp = parseFloat(c.value);
+            let kTemp = cTemp + 273.15;
+            let fTemp = cTemp * (9 / 5) + 32;
+            f.value = round(fTemp);
+            k.value = round(kTemp);
+        })
+        f.addEventListener('input', function () {
+            let fTemp = parseFloat(f.value);
+            let kTemp = (fTemp - 32) * (5 / 9) + 273.15;
+            let cTemp = (5 / 9) * (fTemp - 32)
+            c.value = round(cTemp);
+            k.value = round(kTemp);
+        })
+        k.addEventListener('input', function () {
+            let kTemp = parseFloat(k.value);
+            let cTemp = kTemp - 273.15;
+            let fTemp = (kTemp - 273.15) * (9 / 5) + 32;
+            f.value = round(fTemp);
+            c.value = round(cTemp);
+        })
+        btn.addEventListener('click', function () {
+            c.value = "";
+            f.value = "";
+            k.value = "";
+        })
+    </script>
+
+</body>
+
+</html>
